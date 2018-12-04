@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SzkolaProgramowania"
+             x:Class="SzkolaProgramowania.MainPage">
+
+    <StackLayout x:Name="sl">
+        <Label x:Name="lblMain" Text="Welcome to Xamarin.Forms!"
+           HorizontalOptions="Center" />
+        <Entry x:Name="entryColor" Placeholder="Kolor dla przycisku" Completed="colorButton" />
+        <Button x:Name="btnColor" BackgroundColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Text="Zmień kolor" Clicked="Button_Clicked" />
+        <Button BackgroundColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Text="Nawiguj" Clicked="Button_Clicked_1" />
+        <Button Text="Pokoloruj" Clicked="colorButton" />
+    </StackLayout>
+
+</ContentPage>
