@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Szkola.GridPage">
+    <ContentPage.Content>
+        <Grid Padding="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" >
+                <Label x:Name="lblMain" Text="Welcome to Xamarin.Forms!"
+           HorizontalOptions="Center" />
+                <Entry x:Name="entryColor" Placeholder="Kolor dla przycisku" />
+                <Button x:Name="btnColor" BackgroundColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Text="Zmień kolor" />
+                <Button BackgroundColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Text="Nawiguj"  />
+                <Button Text="Pokoloruj" />
+                <Entry x:Name="webpageEntry" Placeholder="Enter WWW" />
+
+            </StackLayout>
+            <Button Grid.Row="1" Text="Button left" />
+            <Button Grid.Row="1" Grid.Column="2" Text="Button right" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
