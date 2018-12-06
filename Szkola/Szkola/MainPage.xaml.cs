@@ -16,7 +16,7 @@ namespace Szkola
             lblMain.Text = "To jest text zmieniony po inicjalizacji";
             lblMain.TextColor = Color.Blue;
             lblMain.FontSize = 20;
-		}
+        }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
@@ -27,7 +27,7 @@ namespace Szkola
 
         private async void Button_Clicked_1(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new GridPage());
+            await Navigation.PushAsync(new TicTacToePage());
         }
 
         private void colorButton(object sender, EventArgs e)
@@ -59,6 +59,7 @@ namespace Szkola
         private async Task Navigate()
         {
             var url = webpageEntry.Text;
+            App.LocalDB.GetUsers();
             if (string.IsNullOrEmpty(url))
             {
                 await DisplayAlert("UWAGA", "Nie wpisałeś adresu WWW", "OK");
@@ -69,6 +70,8 @@ namespace Szkola
 
             if (response)
             {
+                Data.Properties.AppProperties["webUrl"] = url;
+                await Data.Properties.Save();
                 await Navigation.PushAsync(new HttpClientPage(url));
             }
             else
@@ -80,6 +83,15 @@ namespace Szkola
         private async void DisplayMessage(string message)
         {
             await DisplayAlert("Wiadomość", message, "OK");
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await DisplayAlert("DB Path", (Application.Current as App).DBPath, "OK");
+            if (Data.Properties.AppProperties.ContainsKey("webUrl"))
+                lblUrl.Text = Data.Properties.AppProperties["webUrl"].ToString();
+
         }
     }
 }
