@@ -41,6 +41,16 @@ namespace Szkola.Data
             return result;
         }
 
+        public async Task<int> InsertAll<T>(IEnumerable<T> items)
+        {
+            return await database.InsertAllAsync(items);
+        }
+
+        public async Task<int> UpdateAll<T>(IEnumerable<T> items)
+        {
+            return await database.UpdateAllAsync(items);
+        }
+
         public async Task<int> DeleteItem<T>(T item)
         {
             return await database.DeleteAsync(item);

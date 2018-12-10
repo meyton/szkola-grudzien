@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Szkola.Data.Entities;
 using Xamarin.Forms;
 
 namespace Szkola
@@ -90,6 +91,45 @@ namespace Szkola
             if (Data.Properties.AppProperties.ContainsKey("webUrl"))
                 lblUrl.Text = Data.Properties.AppProperties["webUrl"].ToString();
 
+        }
+
+        private async void Button_Clicked_2(object sender, EventArgs e)
+        {
+            var students = new List<Student>()
+            {
+                new Student() {
+                    FirstName = "Adam",
+                    LastName = "Kowalski",
+                    ClassNumber = 1,
+                    Birthday = new DateTime(1995, 1, 12)
+                },
+                new Student()
+                {
+                    FirstName = "Marcin",
+                    LastName = "Wesel",
+                    ClassNumber = 3,
+                    Birthday = new DateTime(1989, 5, 19)
+                },
+                new Student()
+                {
+                    FirstName = "Natalia",
+                    LastName = "Nowak",
+                    ClassNumber = 2,
+                    Birthday = new DateTime(1990, 10, 25)
+                }
+            };
+
+            await App.LocalDB.InsertAll(students);
+
+            //foreach (var s in students)
+            //    await App.LocalDB.SaveItem(s);
+
+            var dbStudents = await App.LocalDB.GetItems<Student>();
+        }
+
+        private async void Button_Clicked_3(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new StudentsPage());
         }
     }
 }

@@ -14,6 +14,8 @@
         <Button BackgroundColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Text="Nawiguj" Clicked="Button_Clicked_1" />
         <Button Text="Pokoloruj" Clicked="colorButton" />
         <Entry x:Name="webpageEntry" Placeholder="Enter WWW" Completed="WebpageEntry_Completed" />
+        <Button Text="Dodaj studentów" Clicked="Button_Clicked_2" />
+        <Button Text="Lista studentów" Clicked="Button_Clicked_3" />
     </StackLayout>
 
 </ContentPage>

@@ -12,5 +12,6 @@ namespace Szkola.Data.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime Birthday { get; set; }
+        public int ClassNumber { get; set; }
     }
 }
