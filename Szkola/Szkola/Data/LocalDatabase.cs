@@ -16,6 +16,8 @@ namespace Szkola.Data
         {
             database = new SQLiteAsyncConnection(path);
             database.CreateTableAsync<Student>().Wait();
+            database.CreateTableAsync<Subject>().Wait();
+            database.CreateTableAsync<Grade>().Wait();
         }
 
         public async Task<List<T>> GetItems<T>() where T : class, new()

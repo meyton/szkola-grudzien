@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Szkola.EditStudentPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Edycja studenta"
+                   FontSize="Large"
+                   VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Imię" />
+            <Entry x:Name="entryFirstName" />
+            <Label Text="Nazwisko" />
+            <Entry x:Name="entryLastName" />
+            <Label Text="Klasa" />
+            <Entry x:Name="entryClassName" />
+            <Label Text="Data urodzenia:" />
+            <DatePicker x:Name="dpBirthday" />
+            <Button Margin="0, 50" Text="Zapisz" Clicked="Button_Clicked" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

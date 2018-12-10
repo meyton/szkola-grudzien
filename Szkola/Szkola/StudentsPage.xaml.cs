@@ -21,12 +21,17 @@ namespace Szkola
             MyListView.ItemsSource = Students;
             ToolbarItems.Add(new ToolbarItem()
             {
-                Text = "Dodaj nowego",
-                Command = new Command(async () => await NavigateToNewStudent())
+                Text = "+Student",
+                Command = new Command(async () => await Navigation.PushAsync(new AddNewStudentPage()))
+            });
+            ToolbarItems.Add(new ToolbarItem()
+            {
+                Text = "+Przedmiot",
+                Command = new Command(async () => await Navigation.PushAsync(new AddNewSubjectPage()))
             });
         }
 
-        private async Task NavigateToNewStudent()
+        private async Task Navigate()
         {
             await Navigation.PushAsync(new AddNewStudentPage());
         }
@@ -35,14 +40,16 @@ namespace Szkola
         {
             if (e.Item == null)
                 return;
-            
+
             var student = e.Item as Student;
-            
-            await DisplayAlert("Item Tapped", 
-                $"{student.FirstName} {student.LastName} was tapped.", "OK");
+
+            await DisplayAlert("Item Tapped",
+                $"{student.FirstName} {student.LastName} będzie edytowany.", "OK");
 
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
+
+            await Navigation.PushAsync(new EditStudentPage(student));
         }
 
         protected override async void OnAppearing()
