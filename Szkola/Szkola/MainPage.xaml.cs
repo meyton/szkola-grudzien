@@ -59,7 +59,6 @@ namespace Szkola
         private async Task Navigate()
         {
             var url = webpageEntry.Text;
-            App.LocalDB.GetUsers();
             if (string.IsNullOrEmpty(url))
             {
                 await DisplayAlert("UWAGA", "Nie wpisałeś adresu WWW", "OK");
@@ -85,10 +84,9 @@ namespace Szkola
             await DisplayAlert("Wiadomość", message, "OK");
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-            await DisplayAlert("DB Path", (Application.Current as App).DBPath, "OK");
             if (Data.Properties.AppProperties.ContainsKey("webUrl"))
                 lblUrl.Text = Data.Properties.AppProperties["webUrl"].ToString();
 
