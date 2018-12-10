@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Szkola.AddNewStudentPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="15">
+            <Label Text="Dodajesz nowego studenta"
+                   FontSize="Large"
+                   VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" />
+            <Entry x:Name="entryFirstName" Placeholder="Imię" />
+            <Entry x:Name="entryLastName" Placeholder="Nazwisko" />
+            <Entry x:Name="entryClassName" Placeholder="Klasa" />
+            <Label Text="Data urodzenia:"/>
+            <DatePicker x:Name="dpBirthday" />
+            <Button Margin="0, 50" Text="Dodaj studenta" Clicked="Button_Clicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
