@@ -17,6 +17,7 @@
         <Button Text="Dodaj studentów" Clicked="Button_Clicked_2" />
         <Button Text="Lista studentów" Clicked="Button_Clicked_3" />
         <Button Text="Lista ocen" Clicked="Button_Clicked_4" />
+        <Button Text="MVVM Test" Clicked="Button_Clicked_5" />
     </StackLayout>
 
 </ContentPage>

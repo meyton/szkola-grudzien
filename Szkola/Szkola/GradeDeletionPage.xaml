@@ -10,7 +10,7 @@
     <!--Built in Cells-->
     <ListView.ItemTemplate>
         <DataTemplate>
-                <SwitchCell Text="{Binding ShortDescription}" On="{Binding IsGoingToBeDeleted}" />
+            <SwitchCell Text="{Binding ShortDescription}" On="{Binding IsGoingToBeDeleted}" />
         </DataTemplate>
     </ListView.ItemTemplate>
     

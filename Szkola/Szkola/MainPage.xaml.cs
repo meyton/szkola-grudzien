@@ -137,5 +137,10 @@ namespace Szkola
             await Navigation.PushAsync(new GradeDeletionPage());
 
         }
+
+        private async void Button_Clicked_5(object sender, EventArgs e)
+        {
+            await Utils.NavigationService.PushAsync(new View.TestPage(new ViewModel.TestViewModel()));
+        }
     }
 }
