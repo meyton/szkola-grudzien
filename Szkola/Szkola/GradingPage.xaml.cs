@@ -33,7 +33,11 @@ namespace Szkola
         {
             foreach (var i in Items)
             {
-                await App.LocalDB.SaveItem(i.Grade);
+                var r = await App.LocalDB.SaveItem(i.Grade);
+                if (r == 0)
+                {
+                    await DisplayAlert("Błąd", $"Nie zapisano {i.Subject}", "OK");
+                }
             }
         }
 
@@ -53,6 +57,7 @@ namespace Szkola
             base.OnAppearing();
 
             var subjects = await App.LocalDB.GetItems<Subject>();
+            var grades = await App.LocalDB.Database.Table<Grade>().Where(x => x.StudentID == _student.ID).ToListAsync();
 
             Items.Clear();
             foreach (var s in subjects)
@@ -62,8 +67,10 @@ namespace Szkola
                     Subject = s,
                     Grade = new Grade()
                     {
+                        ID = grades.Where(x => x.SubjectID == s.ID).Select(x => x.ID).FirstOrDefault(),
                         SubjectID = s.ID,
-                        StudentID = _student.ID
+                        StudentID = _student.ID,
+                        Value = grades.Where(x => x.SubjectID == s.ID).Select(x => x.Value).FirstOrDefault()
                     }
                 });
             }

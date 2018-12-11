@@ -16,6 +16,7 @@
         <Entry x:Name="webpageEntry" Placeholder="Enter WWW" Completed="WebpageEntry_Completed" />
         <Button Text="Dodaj studentów" Clicked="Button_Clicked_2" />
         <Button Text="Lista studentów" Clicked="Button_Clicked_3" />
+        <Button Text="Lista ocen" Clicked="Button_Clicked_4" />
     </StackLayout>
 
 </ContentPage>

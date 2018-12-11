@@ -131,5 +131,11 @@ namespace Szkola
         {
             await Navigation.PushAsync(new StudentsPage());
         }
+
+        private async void Button_Clicked_4(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new GradeDeletionPage());
+
+        }
     }
 }
