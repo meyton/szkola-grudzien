@@ -13,6 +13,9 @@ namespace Szkola.View
 	public partial class DuckiesPage : ContentPage
 	{
         private DuckiesViewModel _viewModel;
+        private List<Button> _ducks;
+        private double _maxX = 0;
+        private double _maxY = 0;
 
 		public DuckiesPage ()
 		{
@@ -20,21 +23,58 @@ namespace Szkola.View
             _viewModel = new DuckiesViewModel();
             BindingContext = _viewModel;
             _viewModel.Score = 0;
-            Task.Run(async () => await Fly());
+            _maxX = this.Width;
+            _maxY = this.Height;
+            InitGame(3);
 		}
 
-        private async Task Fly()
+        private void InitGame(int number)
         {
-            await btnKaczka.TranslateTo(-200, -100, 2000);
-            await btnKaczka.TranslateTo(200, 100, 2000);
-            await btnKaczka.TranslateTo(1, 1, 2000);
+            _ducks = new List<Button>();
+
+            for (int i = 0; i < number; i++)
+            {
+                var duck = new Button()
+                {
+                    Text = $"Kaczka {i}",
+                    TextColor = Color.Black,
+                    BackgroundColor = Color.Yellow
+                };
+                duck.Clicked += Duck_Clicked;
+                _ducks.Add(duck);
+                playground.Children.Add(duck, new Point(i * 20, i * 30));
+            }
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void Duck_Clicked(object sender, EventArgs e)
         {
             var btn = sender as Button;
             _viewModel.Score += 1;
             btn.IsVisible = false;
+        }
+
+        private async void Fly(uint delay)
+        {
+            var a = new Random();
+            while (_ducks.Any(x => x.IsVisible))
+            {
+                foreach (var b in _ducks)
+                {
+                    var nextX = a.Next((int)_maxX) - b.X;
+                    var nextY = a.Next((int)_maxY) - b.Y;
+                    var t = b.TranslateTo(nextX, nextY, delay);
+                }
+
+                await Task.Delay((int)delay);
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _maxX = this.Width;
+            _maxY = this.Height;
+            Fly(2000);
         }
     }
 }
