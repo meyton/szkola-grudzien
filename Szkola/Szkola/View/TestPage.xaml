@@ -7,7 +7,9 @@
             <Label Text="{Binding Message}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button Text="Zamknij" Clicked="Button_Clicked" />
+            <Button Text="Krzesło" Command="{Binding CloseCommand}" CommandParameter="krzesło" />
+            <Button Text="Stół" Command="{Binding CloseCommand}" CommandParameter="stół" />
+            <Button Text="Kanapa" Command="{Binding CloseCommand}" CommandParameter="kanapa" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

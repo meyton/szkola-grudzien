@@ -13,16 +13,10 @@ namespace Szkola.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TestPage : ContentPage
 	{
-		public TestPage (BaseViewModel viewModel)
+		public TestPage (TestViewModel viewModel)
 		{
 			InitializeComponent ();
             BindingContext = viewModel;
-         
 		}
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            await NavigationService.Pop();
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Szkola.Data;
+using Szkola.View;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -27,7 +28,7 @@ namespace Szkola
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new DuckiesPage());
         }
 
         protected override void OnStart()
