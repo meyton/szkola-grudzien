@@ -71,5 +71,36 @@ namespace Szkola.Services
 
             return response;
         }
+
+
+        public async Task<GetResponse> GetPersonalData()
+        {
+            var response = new GetResponse()
+            {
+                IsSuccess = false
+            };
+            
+            if (string.IsNullOrWhiteSpace(App.AccessToken))
+            {
+                return response;
+            }
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("X-Access-Token", App.AccessToken);
+                var reply = await client.GetAsync("http://api.nintriva.net/v1/me");
+                if (!reply.IsSuccessStatusCode)
+                {
+                    return response;
+                }
+
+                var read = await reply.Content.ReadAsStringAsync();
+                var jsonResponse = JsonConvert.DeserializeObject<MeResponse>(read);
+                response.IsSuccess = true;
+                response.Response = jsonResponse;
+            }
+
+            return response;
+        }
     }
 }

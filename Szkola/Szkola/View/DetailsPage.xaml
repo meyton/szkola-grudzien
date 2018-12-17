@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Szkola.View.DetailsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Strona z detalami" HorizontalTextAlignment="Center" />
+            <Label Text="ID" FontSize="Small" />
+            <Label Text="{Binding User.Id}" TextColor="Red" />
+            <Label Text="Username" FontSize="Small" />
+            <Label Text="{Binding User.Username}" TextColor="Red" />
+            <Label Text="Email" FontSize="Small" />
+            <Label Text="{Binding User.Email}" TextColor="Red" />
+            <Label Text="Created at:" FontSize="Small" />
+            <Label Text="{Binding User.CreatedAt}" TextColor="Red" />
+            <Label Text="Updated at:" FontSize="Small" />
+            <Label Text="{Binding User.UpdatedAt}" TextColor="Red" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
