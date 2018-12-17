@@ -25,7 +25,7 @@ namespace Szkola.View
             _viewModel.Score = 0;
             _maxX = this.Width;
             _maxY = this.Height;
-            InitGame(3);
+            
 		}
 
         private void InitGame(int number)
@@ -74,6 +74,12 @@ namespace Szkola.View
             base.OnAppearing();
             _maxX = this.Width;
             _maxY = this.Height;
+            ProcessGame();
+        }
+
+        private void ProcessGame()
+        {
+            InitGame(3);
             Fly(2000);
         }
     }

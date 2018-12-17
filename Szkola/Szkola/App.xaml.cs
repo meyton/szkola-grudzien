@@ -25,10 +25,12 @@ namespace Szkola
             }
         }
         
+        public static string AccessToken { get; set; }
+
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new DuckiesPage());
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()
