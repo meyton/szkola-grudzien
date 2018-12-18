@@ -46,7 +46,7 @@ namespace Szkola.Services
             {
                 IsSuccess = false
             };
-
+            
             var request = new LoginRequest()
             {
                 Username = username,
@@ -98,6 +98,29 @@ namespace Szkola.Services
                 var jsonResponse = JsonConvert.DeserializeObject<MeResponse>(read);
                 response.IsSuccess = true;
                 response.Response = jsonResponse;
+            }
+
+            return response;
+        }
+
+        public async Task<GetResponse> Logout()
+        {
+            var response = new GetResponse()
+            {
+                IsSuccess = false
+            };
+
+            if (string.IsNullOrWhiteSpace(App.AccessToken))
+            {
+                return response;
+            }
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("X-Access-Token", App.AccessToken);
+                var reply = await client.PostAsync("http://api.nintriva.net/v1/logout", new StringContent(""));
+                
+                response.IsSuccess = reply.IsSuccessStatusCode;
             }
 
             return response;
