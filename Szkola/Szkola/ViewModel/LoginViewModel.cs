@@ -42,14 +42,27 @@ namespace Szkola.ViewModel
             }
         }
 
+        private ImageSource _image;
+        public ImageSource LoginImage { get => _image;
+            set
+            {
+                if (_image != value)
+                {
+                    _image = value;
+                    RaisePropertyChanged(nameof(LoginImage));
+                }
+            }
+        }
         public LoginViewModel()
         {
             _httpService = new HttpService();
             LoginCommand = new Command(async () => await TryToLogin());
+            LoginImage = ImageSource.FromFile("ic_launcher.png");
         }
 
         private async Task TryToLogin()
         {
+            await Task.Delay(2000);
             var response = await _httpService.Authorize(Username, Password);
             if (response.IsSuccess)
             {

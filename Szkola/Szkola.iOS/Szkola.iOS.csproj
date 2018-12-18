@@ -100,7 +100,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard">
+      <SubType>Designer</SubType>
+    </InterfaceDefinition>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -162,5 +164,8 @@
       <Project>{39333ACF-D9DF-4FBF-B722-13055D1FA4CF}</Project>
       <Name>Szkola</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_launcher.png" />
   </ItemGroup>
 </Project>

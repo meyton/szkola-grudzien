@@ -36,7 +36,7 @@ namespace Szkola.ViewModel
         }
 
         private async Task Logout()
-        {
+        { 
             var response = await _httpService.Logout();
             if (response.IsSuccess)
             {
