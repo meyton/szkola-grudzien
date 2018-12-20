@@ -72,10 +72,10 @@ namespace Szkola.ViewModel
                     var accessToken = ((AccessTokenResponse)atResponse.Response).Data.AccessToken;
                     App.AccessToken = accessToken;
                     await Utils.UINotificationService.DisplayAlert($"Zalogowano poprawnie. Twój access token to: {accessToken}.");
-                    var userResponse = await _httpService.GetPersonalData();
+                    var userResponse = await _httpService.GetEmployee(233);
                     if (userResponse.IsSuccess)
                     {
-                        var vm = new DetailsViewModel(((MeResponse)userResponse.Response).Data);
+                        var vm = new DetailsViewModel(((EmployeeResponse)userResponse.Response).Data);
                         await Utils.NavigationService.PushAsync(new DetailsPage(vm));
                     }
 

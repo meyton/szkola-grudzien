@@ -72,6 +72,36 @@ namespace Szkola.Services
             return response;
         }
 
+        public async Task<GetResponse> GetEmployee(int id)
+        {
+            var response = new GetResponse()
+            {
+                IsSuccess = false
+            };
+
+            if (string.IsNullOrWhiteSpace(App.AccessToken))
+            {
+                return response;
+            }
+
+            using (var client = new HttpClient())
+            {
+                var url = $"http://api.nintriva.net/v1/employees/{id}";
+                client.DefaultRequestHeaders.Add("X-Access-Token", App.AccessToken);
+                var reply = await client.GetAsync(url);
+                if (!reply.IsSuccessStatusCode)
+                {
+                    return response;
+                }
+
+                var read = await reply.Content.ReadAsStringAsync();
+                var jsonResponse = JsonConvert.DeserializeObject<EmployeeResponse>(read);
+                response.IsSuccess = true;
+                response.Response = jsonResponse;
+            }
+
+            return response;
+        }
 
         public async Task<GetResponse> GetPersonalData()
         {
@@ -121,6 +151,39 @@ namespace Szkola.Services
                 var reply = await client.PostAsync("http://api.nintriva.net/v1/logout", new StringContent(""));
                 
                 response.IsSuccess = reply.IsSuccessStatusCode;
+            }
+
+            return response;
+        }
+
+        public async Task<GetResponse> UpdateEmployee(int id, string name, string email)
+        {
+            var response = new GetResponse()
+            {
+                IsSuccess = false
+            };
+
+            var request = new
+            {
+                 name,
+                 email
+            };
+
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("X-Access-Token", App.AccessToken);
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(request));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var reply = await client.PutAsync("http://api.nintriva.net/v1/employees/{id}", content);
+                if (!reply.IsSuccessStatusCode)
+                {
+                    return response;
+                }
+
+                var read = await reply.Content.ReadAsStringAsync();
+                var jsonResponse = JsonConvert.DeserializeObject<EmployeeResponse>(read);
+                response.IsSuccess = true;
+                response.Response = jsonResponse;
             }
 
             return response;

@@ -11,9 +11,9 @@ namespace Szkola.ViewModel
 {
     public class DetailsViewModel : BaseViewModel
     {
-        private UserDetails _user;
+        private Employee _user;
 
-        public UserDetails User
+        public Employee User
         {
             get => _user;
             set
@@ -28,7 +28,7 @@ namespace Szkola.ViewModel
 
         public Command LogoutCommand { get; private set; }
 
-        public DetailsViewModel(UserDetails user)
+        public DetailsViewModel(Employee user)
         {
             _httpService = new HttpService();
             User = user;
@@ -36,12 +36,16 @@ namespace Szkola.ViewModel
         }
 
         private async Task Logout()
-        { 
-            var response = await _httpService.Logout();
-            if (response.IsSuccess)
+        {
+            var userResponse = await _httpService.UpdateEmployee((int)User.Id, "Marcin", "marcin@gmail.com");
+            if (userResponse.IsSuccess)
             {
-                App.AccessToken = string.Empty;
-                await Utils.NavigationService.Pop();
+                var response = await _httpService.Logout();
+                if (response.IsSuccess)
+                {
+                    App.AccessToken = string.Empty;
+                    await Utils.NavigationService.Pop();
+                }
             }
         }
 

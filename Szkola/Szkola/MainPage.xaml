@@ -3,21 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Szkola"
              x:Class="Szkola.MainPage">
-
-    <StackLayout x:Name="sl">
-        <Label x:Name="lblMain" Text="Welcome to Xamarin.Forms!"
+    <ScrollView>
+        <StackLayout x:Name="sl">
+            <Label x:Name="lblMain" Text="Welcome to Xamarin.Forms!"
            HorizontalOptions="Center" />
 
-        <Label x:Name="lblUrl" Text="Nie odwiedzono żadnej strony" />
-        <Entry x:Name="entryColor" Placeholder="Kolor dla przycisku" Completed="colorButton" TextChanged="EntryColor_TextChanged" />
-        <Button x:Name="btnColor" BackgroundColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Text="Zmień kolor" Clicked="Button_Clicked" />
-        <Button BackgroundColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Text="Nawiguj" Clicked="Button_Clicked_1" />
-        <Button Text="Pokoloruj" Clicked="colorButton" />
-        <Entry x:Name="webpageEntry" Placeholder="Enter WWW" Completed="WebpageEntry_Completed" />
-        <Button Text="Dodaj studentów" Clicked="Button_Clicked_2" />
-        <Button Text="Lista studentów" Clicked="Button_Clicked_3" />
-        <Button Text="Lista ocen" Clicked="Button_Clicked_4" />
-        <Button Text="MVVM Test" Clicked="Button_Clicked_5" />
-    </StackLayout>
-
+            <Label x:Name="lblUrl" Text="Nie odwiedzono żadnej strony" />
+            <Entry x:Name="entryColor" Placeholder="Kolor dla przycisku" Completed="colorButton" TextChanged="EntryColor_TextChanged" />
+            <Button x:Name="btnColor" BackgroundColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Text="Zmień kolor" Clicked="Button_Clicked" />
+            <Button BackgroundColor="{StaticResource PrimaryColor}" HorizontalOptions="Center" Text="Nawiguj" Clicked="Button_Clicked_1" />
+            <Button Text="Pokoloruj" Clicked="colorButton" />
+            <Entry x:Name="webpageEntry" Placeholder="Enter WWW" Completed="WebpageEntry_Completed" />
+            <Button Text="Dodaj studentów" Clicked="Button_Clicked_2" />
+            <Button Text="Lista studentów" Clicked="Button_Clicked_3" />
+            <Button Text="Lista ocen" Clicked="Button_Clicked_4" />
+            <Button Text="MVVM Test" Clicked="Button_Clicked_5" />
+            <Button Text="Zrób zdjęcie" Clicked="Button_Clicked_6" />
+            <Button Text="Wybierz zdjęcie" Clicked="Button_Clicked_7" />
+            <Image x:Name="image" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

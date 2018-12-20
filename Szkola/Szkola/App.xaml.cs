@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Plugin.Connectivity;
+using System;
+using System.Linq;
 using Szkola.Data;
 using Szkola.View;
 using Xamarin.Forms;
@@ -27,10 +29,27 @@ namespace Szkola
         
         public static string AccessToken { get; set; }
 
+        public static bool DoIHaveInternet()
+        {
+            if (!CrossConnectivity.IsSupported)
+                return true;
+
+            return CrossConnectivity.Current.IsConnected;
+        }
+
+        public static bool IsWifiConnected()
+        {
+            if (!CrossConnectivity.IsSupported)
+                return true;
+
+            var wifi = Plugin.Connectivity.Abstractions.ConnectionType.WiFi;
+            return CrossConnectivity.Current.ConnectionTypes.Any(x => x == wifi);
+        }
+
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

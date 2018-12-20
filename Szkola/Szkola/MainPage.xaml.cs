@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Media;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +10,11 @@ using Xamarin.Forms;
 
 namespace Szkola
 {
-	public partial class MainPage : ContentPage
-	{
-		public MainPage()
-		{
-			InitializeComponent();
+    public partial class MainPage : ContentPage
+    {
+        public MainPage()
+        {
+            InitializeComponent();
             lblMain.Text = "To jest text zmieniony po inicjalizacji";
             lblMain.TextColor = Color.Blue;
             lblMain.FontSize = 20;
@@ -59,6 +60,12 @@ namespace Szkola
 
         private async Task Navigate()
         {
+            if (!App.IsWifiConnected())
+            {
+                await DisplayAlert("Błąd", "Nie masz internetu", "OK");
+                return;
+            }
+
             var url = webpageEntry.Text;
             if (string.IsNullOrEmpty(url))
             {
@@ -129,6 +136,9 @@ namespace Szkola
 
         private async void Button_Clicked_3(object sender, EventArgs e)
         {
+            //await Xamarin.Essentials.Share.RequestAsync("Nowy wpis na blogu", "Nowość");
+            //var location = await Xamarin.Essentials.Geolocation.GetLocationAsync();
+            //await Xamarin.Essentials.Flashlight.TurnOnAsync();
             await Navigation.PushAsync(new StudentsPage());
         }
 
@@ -141,6 +151,83 @@ namespace Szkola
         private async void Button_Clicked_5(object sender, EventArgs e)
         {
             await Utils.NavigationService.PushAsync(new View.TestPage(new ViewModel.TestViewModel()));
+        }
+
+        private async void Button_Clicked_6(object sender, EventArgs e)
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                Directory = "Sample",
+                Name = "test.jpg",
+                SaveToAlbum = true
+            });
+
+            if (file == null)
+                return;
+
+            await DisplayAlert("File Location", file.Path, "OK");
+
+            image.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                return stream;
+            });
+        }
+
+        private async void Button_Clicked_7(object sender, EventArgs e)
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                await DisplayAlert("No Pick Photo", ":( No camera available.", "OK");
+                return;
+            }
+            var options = new Plugin.Media.Abstractions.PickMediaOptions();
+            
+
+            if (string.IsNullOrEmpty(webpageEntry.Text))
+            {
+                if (int.TryParse(webpageEntry.Text, out int result))
+                {
+                    if (0 <= result && result < 101)
+                    options.CompressionQuality = result;
+                }
+            }
+
+            if (string.IsNullOrEmpty(entryColor.Text))
+            {
+                if (int.TryParse(entryColor.Text, out int result))
+                {
+                    options.MaxWidthHeight = result;
+                    options.PhotoSize = Plugin.Media.Abstractions.PhotoSize.MaxWidthHeight;
+                }
+            }
+
+            var file = await CrossMedia.Current.PickPhotoAsync(options);
+                
+            if (file == null)
+                return;
+
+            image.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                return stream;
+            });
+
+            var fileStream = file.GetStream();
+            fileStream.Position = 0;
+            var size = fileStream.Length;
+            await DisplayAlert("File size", size.ToString(), "OK");
+
         }
     }
 }

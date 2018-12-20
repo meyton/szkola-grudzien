@@ -10,6 +10,8 @@ namespace Szkola.Services.Interfaces
         Task<GetResponse> Authorize(string username, string password);
         Task<GetResponse> AccessToken(string code);
         Task<GetResponse> GetPersonalData();
+        Task<GetResponse> GetEmployee(int id);
+        Task<GetResponse> UpdateEmployee(int id, string name, string email);
         Task<GetResponse> Logout();
     }
 }
